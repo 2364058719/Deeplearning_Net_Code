@@ -13,6 +13,7 @@ random.seed(a=None, version=2)
 def get_mean_std_per_batch(image_path, df, H=320, W=320):
     sample_data = []
     transform = transforms.Compose([
+        transforms.ToPILImage(),
         transforms.Resize((H, W)),
         transforms.ToTensor()
     ])
@@ -100,11 +101,11 @@ def compute_gradcam(model, img, image_dir, df, labels, selected_labels, layer_na
             j += 1
 
 
-def get_roc_curve(labels, predicted_vals, generator):
+def get_roc_curve(pre_labels, predicted_vals, labels):
     auc_roc_vals = []
-    for i in range(len(labels)):
+    for i in range(len(pre_labels)):
         try:
-            gt = generator.labels[:, i]
+            gt = pre_labels[:, i]
             pred = predicted_vals[:, i]
             auc_roc = roc_auc_score(gt, pred)
             auc_roc_vals.append(auc_roc)
