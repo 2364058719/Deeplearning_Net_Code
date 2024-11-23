@@ -2,3 +2,5 @@
 /pytorch/data/**
 /data/**
 /pytorch/ai_for_medicine/diagnosis/data/
+/pytorch/data/
+/pytorch/tutorial/models/
